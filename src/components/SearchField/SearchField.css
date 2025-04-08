@@ -1,0 +1,42 @@
+.character-container {
+    display: flex;
+    justify-content: center;
+}
+
+.character-box {
+    justify-content: flex-start;
+    margin: 1rem;
+}
+
+.character-label {
+    color: #8c8c8c;
+    font-size: 0.7rem;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s ease;
+}
+
+.character-input {
+    border: none;
+    border-bottom: 1px solid #8c8c8c;
+    outline: none;
+    font-size: 1rem;
+    color: #222;
+    padding: 0.25rem 0;
+    transition: border-color 0.2s ease;
+    width: 100%;
+    max-width: 20rem;
+    background-color: transparent;
+  }
+
+  .character-box:focus-within .character-label {
+    color: #1976d2;
+  }
+
+  
+  .character-input:hover {
+    border-bottom: 2px solid #8c8c8c;
+  }
+  
+  .character-input:focus {
+    border-bottom: 2px solid #1976d2;
+  }
