@@ -14,7 +14,7 @@ const speciesOptions = [
 const genderOptions = ['All', 'Male', 'Female', 'Genderless', 'Unknown'];
 const statusOptions = ['All', 'Alive', 'Dead', 'Unknown'];
 
-function SearchField() {
+function SearchField({ setResults }) {
     const [filters, setFilters] = useState({
         name: '',
         type: '',
@@ -24,7 +24,6 @@ function SearchField() {
     });
 
     const [infoResults, setInfoResults] = useState([]);
-    const [results, setResults] = useState([]);
     const [searchParams] = useSearchParams();
 
     useEffect(() => {
@@ -77,6 +76,7 @@ function SearchField() {
             gender: 'All',
             status: 'All'
         });
+        setInfoResults([]);
         setResults([]);
     };
 

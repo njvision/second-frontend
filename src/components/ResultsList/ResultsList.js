@@ -1,3 +1,5 @@
+import "./ResultsList.css";
+
 function ResultsList({ infoResults }) {
     return (
         <div className="results-row">

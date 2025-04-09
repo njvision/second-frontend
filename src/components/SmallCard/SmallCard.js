@@ -1,19 +1,18 @@
-import morty from '../../images/morty.png'
 import "./SmallCard.css"
 
-function SmallCard () {
+function SmallCard({ character }) {
     return (
         <div className='small-card'>
             <div className='small-card-image'>
-                <img src={morty} alt='Rick Sanchez' />
+                <img src={character.image} alt={character.name} />
             </div>
             <div className='small-card-info'>
-                <h1 className='card-title'>Rick Sanchez</h1>
-                    <ul className='card-details'>
-                        <li><span>species: </span><span className='detail'>Human</span></li>
-                        <li><span>gender: </span><span className='detail'>Male</span></li>
-                        <li><span>status: </span><span className='detail'>Alive</span></li>
-                    </ul>
+                <h1 className='card-title'>{character.name}</h1>
+                <ul className='card-details'>
+                    <li><span>species: </span><span className='detail'>{character.species}</span></li>
+                    <li><span>gender: </span><span className='detail'>{character.gender}</span></li>
+                    <li><span>status: </span><span className='detail'>{character.status}</span></li>
+                </ul>
                 <div className='card-button'>
                     <a href='/charachter/1'>LEARN MORE</a>
                 </div>
