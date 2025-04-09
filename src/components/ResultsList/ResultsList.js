@@ -1,8 +1,8 @@
-function ResultsList({ results }) {
+function ResultsList({ infoResults }) {
     return (
         <div className="results-row">
-            {results.length > 0 ? (     
-                <p>Found {results.lenght} characters</p>) 
+            {infoResults.count > 0 ? (     
+                <p>Found {infoResults.count} characters</p>) 
                 : (
                 <p>No charachter found.</p>
                 )}

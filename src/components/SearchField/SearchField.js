@@ -3,7 +3,8 @@ import DropdownNavField from "../DropdownNavField/DropdownNavField"
 import InputNavField from "../InputNavField/InputNavField";
 import Button from "../Button/Button";
 import ResultsList from "../ResultsList/ResultsList"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 const speciesOptions = [
     'All', 'Alien', 'Animal', 'Cronenberg', 'Disease', 'Human',
@@ -22,7 +23,47 @@ function SearchField() {
         status: 'All'
     });
 
+    const [infoResults, setInfoResults] = useState([]);
     const [results, setResults] = useState([]);
+    const [searchParams] = useSearchParams();
+
+    useEffect(() => {
+        const name = searchParams.get("name") || "";
+        const type = searchParams.get("type") || "";
+        const species = searchParams.get("species") || "All";
+        const gender = searchParams.get("gender") || "All";
+        const status = searchParams.get("status") || "All";
+
+        setFilters({ name, type, species, gender, status });
+    }, []);
+
+    useEffect(() => {
+        const fetchCharacters = async () => {
+            const params = new URLSearchParams({
+                name: filters.name,
+                type: filters.type,
+                species: filters.species === "All" ? "" : filters.species,
+                gender: filters.gender === "All" ? "" : filters.gender,
+                status: filters.status === "All" ? "" : filters.status,
+                page: searchParams.get("page") || "1"
+            });
+
+            const url = `https://rickandmortyapi.com/api/character/?${params.toString()}`;
+
+            try {
+                const res = await fetch(url);
+                const data = await res.json();
+                setInfoResults(data.info || []);
+                setResults(data.results || []);
+            } catch (err) {
+                console.error("GET request error", err);
+                setInfoResults([]);
+                setResults([]);
+            }
+        };
+
+        fetchCharacters();
+    }, [filters]);
 
     const handChange = (field, value) => {
         setFilters(prev => ({ ...prev, [field]: value }))
@@ -41,7 +82,7 @@ function SearchField() {
 
     return (
         <div className="filter-container">
-            <form className="character-container" method="GET" action="/filter">
+            <form className="character-container" method="GET" action="">
                 <div className="filter-search-row">
                     <InputNavField
                         name="name"
@@ -81,7 +122,7 @@ function SearchField() {
                 </div>
             </form>
 
-            <ResultsList results={results} />
+            <ResultsList infoResults={infoResults} />
         </div>
     );
 }
