@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import "./DropdownNavField.css";
 
-function DropdownNavField({ name, label, options, defaultValue = 'All' }) {
+function DropdownNavField({ name, label, options, defaultValue = 'All', onChange }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(defaultValue);
 
   const handleSelect = (option) => {
-    setSelected(option);
+    if (onChange) {
+      onChange({ target: { name, value: option } });
+    }
     setIsOpen(false);
   };
 
@@ -16,15 +17,15 @@ function DropdownNavField({ name, label, options, defaultValue = 'All' }) {
         {label}
       </label>
 
-      <input type="hidden" name={name} value={selected} />
+      <input type="hidden" name={name} value={defaultValue} />
 
       <div
-        className="dropdown-field character-input" 
+        className="dropdown-field character-input"
         onClick={() => setIsOpen(!isOpen)}
         onBlur={() => setTimeout(() => setIsOpen(false), 100)}
         tabIndex={0}
       >
-        <span className="dropdown-selected">{selected}</span>
+        <span className="dropdown-selected">{defaultValue}</span>
         <span className="dropdown-arrow">▾</span>
       </div>
 
@@ -33,8 +34,8 @@ function DropdownNavField({ name, label, options, defaultValue = 'All' }) {
           {options.map((option) => (
             <li
               key={option}
-              className={`dropdown-option ${option === selected ? 'selected' : ''}`}
-              onClick={() => handleSelect(option)}
+              className={`dropdown-option ${option === defaultValue ? 'selected' : ''}`}
+              onMouseDown={() => handleSelect(option)}
             >
               {option}
             </li>
