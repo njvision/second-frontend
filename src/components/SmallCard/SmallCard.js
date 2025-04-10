@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./SmallCard.css"
 
 function SmallCard({ character }) {
@@ -14,7 +15,7 @@ function SmallCard({ character }) {
                     <li><span>status: </span><span className='detail'>{character.status}</span></li>
                 </ul>
                 <div className='card-button'>
-                    <a href='/charachter/1'>LEARN MORE</a>
+                    <Link to={`/character/${character.id}`}>LEARN MORE</Link>
                 </div>
             </div>
         </div>

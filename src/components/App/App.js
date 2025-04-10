@@ -1,6 +1,8 @@
+import { Routes, Route } from "react-router-dom";
 import SmallCard from '../SmallCard/SmallCard';
 import SearchField from '../SearchField/SearchField';
 import Pagination from '../Pagination/Pagination';
+import CharacterDetail from "../CharacterDetail/CharacterDetail";
 import { useState } from "react";
 import "./App.css";
 
@@ -12,30 +14,38 @@ function App() {
 
   return (
     <div className="App">
-      <nav className="nav">
-        <SearchField 
-        setResults={setResults} 
-        setInfoResults={setInfoResults}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        infoResults={infoResults}/>
-      </nav>
-      <main className="card-grid">
-        {results.length > 0 ? (
-          results.map((character) => (
-            <SmallCard character={character} />
-          ))
-        ) : (
-          <p>No results found.</p>
-        )}
-      </main>
-      <footer className="footer">
-      <Pagination
-        currentPage={currentPage}
-        totalPages={infoResults.pages || 1}
-        onPageChange={(page) => setCurrentPage(page)}
-      />
-      </footer>
+      <Routes>
+        <Route path="/" element={
+          <>
+            <nav className="nav">
+              <SearchField
+                setResults={setResults}
+                setInfoResults={setInfoResults}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                infoResults={infoResults} />
+            </nav>
+            <main className="card-grid">
+              {results.length > 0 ? (
+                results.map((character) => (
+                  <SmallCard character={character} />
+                ))
+              ) : (
+                <p>No results found.</p>
+              )}
+            </main>
+            <footer className="footer">
+              <Pagination
+                currentPage={currentPage}
+                totalPages={infoResults.pages || 1}
+                onPageChange={(page) => setCurrentPage(page)}
+              />
+            </footer>
+          </>
+        }
+        />
+        <Route path="/character/:id" element={<CharacterDetail />} />
+      </Routes>
     </div>
   );
 }
