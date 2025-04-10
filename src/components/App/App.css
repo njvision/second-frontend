@@ -6,3 +6,11 @@
     max-width: 1440px;
     gap: 2rem;
 }
+
+main p {
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+    color: #8c8c8c;
+    margin-top: 0;
+}

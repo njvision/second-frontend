@@ -3,6 +3,7 @@ import SmallCard from '../SmallCard/SmallCard';
 import SearchField from '../SearchField/SearchField';
 import Pagination from '../Pagination/Pagination';
 import CharacterDetail from "../CharacterDetail/CharacterDetail";
+import LocationDetail from "../LocationDetail/LocationDetail";
 import { useState } from "react";
 import "./App.css";
 
@@ -31,7 +32,7 @@ function App() {
                   <SmallCard character={character} />
                 ))
               ) : (
-                <p>No results found.</p>
+                <p>Empty...</p>
               )}
             </main>
             <footer className="footer">
@@ -45,6 +46,7 @@ function App() {
         }
         />
         <Route path="/character/:id" element={<CharacterDetail />} />
+        <Route path="/location/:id" element={<LocationDetail />} />
       </Routes>
     </div>
   );
