@@ -5,11 +5,13 @@
     border-radius: 0.75rem;
     box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
     padding: 1rem;
-    min-width: 336px;
-    width: 336px;
-    height: 180px;
-    margin: 1.25rem auto;
+    width: 100%;
+    max-width: 336px;
+    /* width: 320px; */
+    height: 220px;
+    margin: 0;
     gap: 1.25rem;
+    box-sizing: border-box;
 }
 
 .small-card-image img {
@@ -54,7 +56,7 @@
     font-size: 0.875rem;
     transition: background-color 0.2s easy;
     padding: 0.5rem;
-    margin-top: 1.5rem;
+    /* margin-top: 1.5rem; */
     border-radius: 0.3rem;
     cursor: pointer;
     border: none;

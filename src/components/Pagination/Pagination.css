@@ -1,0 +1,36 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 2rem 0;
+    flex-wrap: wrap;
+  }
+  
+  .pagination button {
+    border: none;
+    background-color: transparent;
+    color: #1976d2;
+    padding: 0.5rem;
+    cursor: pointer;
+    /* font-weight: bold; */
+    border-radius: 9999px;
+    min-width: 32px;
+    height: 32px;
+  }
+  
+  .pagination button.active {
+    background-color: #e3f2fd;
+    color: #707070;
+  }
+  
+  .pagination button:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+  
+  .pagination span {
+    display: inline-block;
+    padding: 0.5rem;
+    color: #888;
+  }
+  

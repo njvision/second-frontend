@@ -14,7 +14,7 @@ const speciesOptions = [
 const genderOptions = ['All', 'Male', 'Female', 'Genderless', 'Unknown'];
 const statusOptions = ['All', 'Alive', 'Dead', 'Unknown'];
 
-function SearchField({ setResults }) {
+function SearchField({ setResults, setInfoResults, currentPage, setCurrentPage, infoResults }) {
     const [filters, setFilters] = useState({
         name: '',
         type: '',
@@ -23,7 +23,6 @@ function SearchField({ setResults }) {
         status: 'All'
     });
 
-    const [infoResults, setInfoResults] = useState([]);
     const [searchParams] = useSearchParams();
 
     useEffect(() => {
@@ -44,7 +43,7 @@ function SearchField({ setResults }) {
                 species: filters.species === "All" ? "" : filters.species,
                 gender: filters.gender === "All" ? "" : filters.gender,
                 status: filters.status === "All" ? "" : filters.status,
-                page: searchParams.get("page") || "1"
+                page: currentPage
             });
 
             const url = `https://rickandmortyapi.com/api/character/?${params.toString()}`;
@@ -62,10 +61,11 @@ function SearchField({ setResults }) {
         };
 
         fetchCharacters();
-    }, [filters]);
+    }, [filters, currentPage]);
 
     const handChange = (field, value) => {
         setFilters(prev => ({ ...prev, [field]: value }))
+        setCurrentPage(1);
     };
 
     const handleReset = () => {

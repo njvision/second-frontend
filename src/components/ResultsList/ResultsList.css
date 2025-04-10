@@ -1,4 +1,9 @@
 .results-row  {
     font-style: italic;
     color: #8c8c8c;
+    margin-top: 0;
+}
+
+p {
+    margin-top: 0;
 }
